@@ -46,6 +46,17 @@ public class EnemyController : MonoBehaviour
                 Debug.Log("Nesxpoint");
             }
         }
+
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Collision");
+        PlayerInverntory playerInverntory = other.GetComponent<PlayerInverntory>();
+        if(playerInverntory != null)
+        {
+            playerInverntory.EnemyHit();
+            
+        }
     }
 
     private void NextPoint()
