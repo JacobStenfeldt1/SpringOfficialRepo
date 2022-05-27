@@ -38,13 +38,12 @@ public class EnemyController : MonoBehaviour
             {
                 Chase();
                 Debug.Log("Chased");
-            }
-
-            else
-            {
-                NextPoint();
-                Debug.Log("Nesxpoint");
-            }
+            } 
+        } 
+        else
+        {
+        NextPoint();
+        Debug.Log("Nesxpoint");
         }
 
     }

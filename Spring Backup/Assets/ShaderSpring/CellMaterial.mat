@@ -42,7 +42,7 @@ Material:
     - _LightingCutoff: 0.02
     - _smoothness: 999.99
     m_Colors:
-    - _DiffuseColor: {r: 0, g: 0.4820161, b: 1, a: 1}
+    - _DiffuseColor: {r: 0.9455147, g: 0, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 0}
-    - _SpecularColor: {r: 0.8703635, g: 1, b: 0, a: 0}
+    - _SpecularColor: {r: 0.7264151, g: 0.31980535, b: 0.36617762, a: 0}
   m_BuildTextureStacks: []

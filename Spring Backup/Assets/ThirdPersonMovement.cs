@@ -5,7 +5,7 @@ using UnityEngine;
 public class ThirdPersonMovement : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    public Animator animator;
     public CharacterController controller;
     public Transform cam; // genom att referera till kameran kan vi använda dess euler vinklar för att beräkna hilken vilken som spelaren ska vandrai
     public Transform groundCheck;
@@ -26,7 +26,8 @@ public class ThirdPersonMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Vad är is grounded 
+        //Vad är is grounded '
+        animator = GetComponent<Animator>();
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundmask); // När "is grounded är tru" kollar vi vilken position spelaren har i relation till marken, 
         // Vi kollar inom ett område på 0.2 längd enheter. Alltå så måste marken befinna sig inom 0.2 l.e för att beräknas som grounded
         //Sist kollar vi om det vi kolliserar med ingår i vår groundmask [allt som är mark går med i vår ground mask]
@@ -44,6 +45,7 @@ public class ThirdPersonMovement : MonoBehaviour
 
         if (direction.magnitude >= 0.1f) // Om längden av vår riktnings vektor >= 0.1 kommer vi röra oss i den riktningen Här lastar du in Animation transitions 
         {
+            animator.SetBool("IsMoving", true);
 
             float TargetAngle = Mathf.Atan2(direction.x, direction.z)* Mathf.Rad2Deg + cam.eulerAngles.y;// Vi lägger till kameras y rotation så att spelaren kollar ditt  //" hur mycket ska vi röra oss på y axeln för att titta i rätt rikning" Co Tangens för vektorn anver åt vilket håll spelaren ska titta baserat på om vektorn pekar rakt fram eller åt en vinkel
             // vektorn pelar åt sama håll som dess adderade / subtraherade komposanter(komposant uppdelning) aå spelaren följker helt enkelt vilken knapp du trycker på och vänder sig ditåt 
@@ -56,6 +58,10 @@ public class ThirdPersonMovement : MonoBehaviour
 
             controller.Move(movedir.normalized * speed * Time.deltaTime); // Time . delta time gör det oberoende på framerate man måste normalizera dels för att vi rör oss, men även för att inte spä på rörelsen pga komposant beräkning 
 
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
         }
         // Lägger till hopp
         if (Input.GetButtonDown("Jump") && isGrounded) 
